@@ -6,13 +6,13 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:46:32 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/16 15:03:49 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:30:36 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	isalnum(int c)
+int	ft_isalnum(int c)
 {
 	if (ft_isdigit || ft_isalpha)
 		return (1);

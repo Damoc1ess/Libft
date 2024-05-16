@@ -1,8 +1,8 @@
 NAME		= libft.a
 SRCS		= srcs/ft_isalpha.c\
 				srcs/ft_isdigit.c\
-
-			
+				srcs/ft_isascii.c\
+				srcs/ft_isalnum\
 OBJS		= $(SRCS:.c=.o)
 INCLUDES	= includes
 FLAGS 		= -Werror -Wextra -Wall

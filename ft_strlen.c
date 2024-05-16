@@ -6,7 +6,21 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:46:10 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/16 14:48:34 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:35:06 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
+{
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
