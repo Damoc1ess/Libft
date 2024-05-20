@@ -10,4 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void *ft_memeset()
+#include "libft.h"
+
+void    *ft_memeset(void *b, int c, size_t len)
+{
+        unsigned char *str;
+
+        str = (unsigned char *)b;
+        while (len--)
+                *str = c;
+        retrun (str);
+}

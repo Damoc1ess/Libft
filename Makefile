@@ -6,7 +6,12 @@ SRCS		= srcs/ft_isalpha.c\
 				srcs/ft_isprint.c\
 				srcs/ft_strlen.c\
 				srcs/ft_memset.c\
-				srcs/ft_isalnum\
+				srcs/ft_bzero.c\
+				srcs/ft_memcpy.c\
+				srcs/ft_memmove.c\
+				srcs/ft_strlcpy.c\
+				srcs/ft_strlcat.c\
+
 OBJS		= $(SRCS:.c=.o)
 INCLUDES	= includes
 FLAGS 		= -Werror -Wextra -Wall
