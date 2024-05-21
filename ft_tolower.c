@@ -6,7 +6,18 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:45:59 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/16 14:48:13 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:15:24 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
+int	ft_toupper(int c)
+{
+	if ((c >= 'A' && c <= 'Z'))
+	{
+		c += 32;
+	}
+	return (c);
+}
 

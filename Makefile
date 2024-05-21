@@ -11,6 +11,9 @@ SRCS		= srcs/ft_isalpha.c\
 				srcs/ft_memmove.c\
 				srcs/ft_strlcpy.c\
 				srcs/ft_strlcat.c\
+				srcs/ft_toupper.c\
+				srcs/ft_tolower.c\
+				srcs/ft_strchr.c\
 
 OBJS		= $(SRCS:.c=.o)
 INCLUDES	= includes
