@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:46:05 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/21 22:15:23 by fflamion         ###   ########.fr       */
+/*   Created: 2024/05/21 22:11:48 by fflamion          #+#    #+#             */
+/*   Updated: 2024/05/21 22:22:43 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strdup(const char *s)
 {
-	size_t	i;
-	size_t	j;
-	size_t	n_len;
-	char	*biggest;
+	int		i;
+	int		len;
+	char	*str;
 
 	i = 0;
-	biggest = (char *)big;
-	n_len = ft_strlen(little);
-	if (n_len == 0 || big == little)
-		return (biggest);
-	while (biggest[i] != '\0' && i < len)
+	len = ft_strlen(s);
+	if ((str = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
+		return (NULL);
+	while (i < len)
 	{
-		j = 0;
-		while (biggest[i + j] != '\0' && little[j] != '\0'
-			&& biggest[i + j] == little[j] && i + j < len)
-			j++;
-		if (j == n_len)
-			return (biggest + i);
+		str[i] = s[i];
 		i++;
 	}
-	return (0);
+	str[i] = '\0';
+	return (str);
 }
-
+/*
+int	main(void)
+{
+	printf("%s",ft_strdup("c est le test"));
+}
+*/
