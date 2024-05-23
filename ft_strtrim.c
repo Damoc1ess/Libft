@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:45:59 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/22 13:48:52 by fflamion         ###   ########.fr       */
+/*   Created: 2024/05/22 14:33:39 by fflamion          #+#    #+#             */
+/*   Updated: 2024/05/22 16:38:29 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	if ((c >= 'A' && c <= 'Z'))
-	{
-		c += 32;
-	}
-	return (c);
+	size_t	len;
+
+	if (!s1 || !set)
+		return (NULL);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	len = ft_strlen(s1);
+	while (len > 0 && ft_strchr(set, s1[len - 1]))
+		len--;
+	return (ft_substr(s1, 0, len));
 }
+/*
+int	main(void)
+{
+	printf("%s", ft_strtrim("Yo tout le monde c est Florent", "Yt"));
+}
+*/

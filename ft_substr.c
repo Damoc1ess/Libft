@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:51:17 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/22 12:16:30 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:37:20 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 /*
 int	main(void)
 {
-	printf("%s", ft_substr("Hello, World!!!", 0, 123));
+	printf("%s", ft_substr("Hello, World!!!", 2, 0));
 	return (0);
 }
 */

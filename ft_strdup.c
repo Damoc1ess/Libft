@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 22:11:48 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/21 22:22:43 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:48:16 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = ft_strlen(s);
-	if ((str = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
 	while (i < len)
 	{
@@ -31,8 +32,8 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 /*
-int	main(void)
-{
-	printf("%s",ft_strdup("c est le test"));
-}
+   int	main(void)
+   {
+   printf("%s",ft_strdup(""));
+   }
 */

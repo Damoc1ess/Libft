@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 10:46:16 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/21 14:32:25 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/22 13:49:16 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memeset(void *b, int c, size_t len)
 {
-	unsigned char *str;
+	unsigned char	*str;
 
 	str = (unsigned char *)b;
 	while (len--)
