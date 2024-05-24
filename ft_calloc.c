@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 20:45:51 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/22 14:07:49 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:47:32 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void
 {
 	void	*ptr;
 
+	if (nmemb > size / SIZE_MAX)
+		return (0);
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (NULL);

@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:46:16 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/24 18:11:59 by fflamion         ###   ########.fr       */
+/*   Created: 2024/05/24 16:16:19 by fflamion          #+#    #+#             */
+/*   Updated: 2024/05/24 17:04:30 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_putnbr_fd(int n, int fd)
 {
-	unsigned char	*str;
+	size_t	nb;
 
-	str = (unsigned char *)b;
-	while (len--)
-		str[len] = (unsigned char)c;
-	return (b);
+	nb = n;
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		nb *= -1;
+	}
+	if (nb > 9)
+		ft_putnbr_fd(nb / 10, fd);
+	ft_putchar_fd(nb % 10 + '0', fd);
 }
 /*
 int	main(void)
 {
-	ft_memset(" ",0 , 12);
+	int	nbr;
+	int	fd;
+
+	nbr = 2147483647;
+	fd = open("test", O_CREAT | O_WRONLY, 1000);
+	ft_putnbr_fd(nbr, fd);
+	close(fd);
 }
 */

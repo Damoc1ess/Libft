@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:33:39 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/22 16:38:29 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:49:32 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 /*
 int	main(void)
 {
-	printf("%s", ft_strtrim("Yo tout le monde c est Florent", "Yt"));
+	printf("%s", ft_strtrim("YYYtttttYo tout le mondetYYYYttttt", "Yttt"));
 }
 */
