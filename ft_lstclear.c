@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 10:46:36 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/25 15:59:30 by fflamion         ###   ########.fr       */
+/*   Created: 2024/05/25 18:10:36 by fflamion          #+#    #+#             */
+/*   Updated: 2024/05/30 16:19:00 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	int	sign;
-	int	value;
+	t_list	*next;
+	t_list	*swap;
 
-	sign = 1;
-	value = 0;
-	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
-		str++;
-	if (*str == '-' || *str == '+')
-		sign = 44 - *str++;
-	while (ft_isdigit(*str))
-		value = value * 10 + (*str++ - '0');
-	return (sign * value);
+	next = *lst;
+	while (next)
+	{
+		del(next->content);
+		swap = next->next;
+		free(next);
+		next = swap;
+	}
+	*lst = NULL;
 }
-/*
-int	main(void)
-{
-	printf("%d", ft_atoi("1234142312"));
-}
-*/

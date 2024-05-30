@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 10:51:17 by fflamion          #+#    #+#             */
-/*   Updated: 2024/05/22 16:37:20 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/05/25 16:06:50 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,26 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
-	size_t	i;
+	size_t	slen;
 
-	i = 0;
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		return ("");
-	if (len > (ft_strlen(s) - start))
-		len = (ft_strlen(s) - start);
-	substr = malloc(sizeof(char) * (len + 1));
+	slen = ft_strlen(s);
+	if (start >= slen)
+		return (ft_strdup(""));
+	if (len > slen - start)
+		len = slen - start;
+	substr = (char *)malloc(sizeof(char) * (len + 1));
 	if (!substr)
 		return (NULL);
-	while (i < len)
-	{
-		substr[i] = s[start + i];
-		i++;
-	}
-	substr[i] = '\0';
+	ft_memcpy(substr, s + start, len);
+	substr[len] = '\0';
 	return (substr);
 }
 /*
 int	main(void)
 {
-	printf("%s", ft_substr("Hello, World!!!", 2, 0));
+	printf("%s", ft_substr("Hello, World!!!", 78, 100));
 	return (0);
 }
 */
