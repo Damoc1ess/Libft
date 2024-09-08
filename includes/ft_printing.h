@@ -6,7 +6,7 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/07 13:40:15 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/09/08 19:00:08 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_putnbr_unsigned(unsigned long n);
 void	ft_putstr_fd(char *str, int fd);
 int		ft_putstr(const char *str);
+int		ft_putstr_red(const char *str);
 int		ft_putnbr(int n);
 
 #endif
