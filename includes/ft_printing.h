@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2024/09/08 19:00:08 by fflamion         ###   ########.fr       */
+/*   Created: 2024/09/17 12:34:39 by fflamion          #+#    #+#             */
+/*   Updated: 2024/09/17 12:34:41 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PRINTING_H
 # define FT_PRINTING_H

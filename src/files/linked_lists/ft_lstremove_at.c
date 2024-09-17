@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_inplace.c                                :+:      :+:    :+:   */
+/*   ft_lstremove_at.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 12:29:57 by fflamion          #+#    #+#             */
-/*   Updated: 2024/09/07 13:42:31 by fflamion         ###   ########.fr       */
+/*   Created: 2024/09/04 12:55:26 by fflamion          #+#    #+#             */
+/*   Updated: 2024/09/17 12:08:47 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstmap_inplace(t_list *lst, void *(*f)(void *))
+void	ft_lstremove_at(t_list **lst, size_t pos)
 {
-	if (lst == NULL || f == NULL)
-		return;
-	while (lst)
+	t_list	*current;
+	t_list	*previous;
+	size_t	i;
+
+	if (!lst || !*lst)
+		return ;
+	current = *lst;
+	previous = NULL;
+	i = 0;
+	while (current && i < pos)
 	{
-		lst->content = (*f)(lst->content);
-		lst = lst->next;
+		previous = current;
+		current = current->next;
+		i++;
 	}
+	if (!current)
+		return ;
+	if (previous)
+		previous->next = current->next;
+	else
+		*lst = current->next;
+	free(current);
 }

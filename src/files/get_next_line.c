@@ -5,115 +5,102 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 20:41:32 by fflamion          #+#    #+#             */
-/*   Updated: 2024/09/07 13:42:31 by fflamion         ###   ########.fr       */
+/*   Created: 2024/09/17 11:14:12 by fflamion          #+#    #+#             */
+/*   Updated: 2024/09/17 11:14:14 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char	*taking_the_buff(int fd, char data[BUFFER_SIZE], char *output)
+char	*handle_read_handle(char *next_line)
 {
-	char	*buffer;
-	char	*temp;
-	int		bytes_read;
-
-	bytes_read = 1;
-	while (bytes_read != 0)
+	if (get_nl(next_line))
+		next_line = gnl_substr(next_line, 0, get_nl(next_line));
+	else if (!gnl_strlen(next_line))
 	{
-		buffer = ftt_calloc(BUFFER_SIZE + 1, sizeof(char));
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read < 0)
+		if (next_line)
+			free(next_line);
+		return (NULL);
+	}
+	return (next_line);
+}
+
+char	*handle_read(int fd, char *buffer, char *next_line)
+{
+	int		b_read;
+
+	b_read = 1;
+	while (b_read > 0 && !get_nl(next_line))
+	{
+		b_read = read(fd, buffer, BUFFER_SIZE);
+		buffer[b_read] = '\0';
+		if (b_read < 0)
 		{
-			bytes_read = 0;
-			while (bytes_read < BUFFER_SIZE)
-				data[bytes_read++] = 0;
-			return (free(buffer), NULL);
+			free(next_line);
+			return (NULL);
 		}
-		temp = output;
-		output = my_strjoin(output, buffer);
-		free(temp);
-		free(buffer);
-		bytes_read = set_data(data, output, bytes_read);
+		next_line = gnl_strjoin(next_line, buffer);
+		if (!next_line || gnl_strlen(next_line) == 0)
+		{
+			if (next_line)
+				free(next_line);
+			return (NULL);
+		}
 	}
-	return (output);
+	return (handle_read_handle(next_line));
 }
 
-int	set_data(char data[BUFFER_SIZE], char *output, int bytes_read)
+void	remove_begin(char *buffer)
 {
 	int		i;
-	int		j;
-	char	*memo;
+	int		first_nl;
 
-	memo = ft_strchr(output, '\n');
-	if (memo == NULL)
-		return (bytes_read);
 	i = 0;
-	j = 1;
-	while (memo[j] != '\0')
-		data[i++] = memo[j++];
-	i = 1;
-	while (memo[i])
-		memo[i++] = '\0';
-	return (0);
-}
-
-char	*data_with_nl(char data[BUFFER_SIZE], char *place_sn)
-{
-	char	*output;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	output = ftt_calloc(place_sn - data + 2, sizeof(char));
-	while (data[++i] != '\n')
-		output[i] = data[i];
-	output[i] = '\n';
-	output[++i] = '\0';
-	while (data[i] != '\0')
-		data[j++] = data[i++];
-	while (data[j])
-		data[j++] = '\0';
-	return (output);
-}
-
-char	*verif_data(char data[BUFFER_SIZE], int fd)
-{
-	char	*output;
-	char	*memo;
-	int		i;
-
-	output = NULL;
-	i = -1;
-	if (data[0] != 0)
+	first_nl = get_nl(buffer);
+	while (i + first_nl < (int)gnl_strlen(buffer))
 	{
-		memo = ft_strchr(data, '\n');
-		if (memo)
-			return (data_with_nl(data, memo));
-		output = ftt_calloc(BUFFER_SIZE + 1, sizeof(char));
-		while (data[++i])
-			output[i] = data[i];
-		i = 0;
-		while (i < BUFFER_SIZE)
-			data[i++] = 0;
+		buffer[i] = buffer[i + first_nl];
+		i++;
 	}
-	if (data[0] == 0)
-		output = taking_the_buff(fd, data, output);
-	return (output);
+	buffer[i] = '\0';
+}
+
+char	*move_buf_nl(char *buffer, char **next_line)
+{
+	int		i;
+
+	i = 0;
+	*next_line = gnl_calloc(sizeof(char), gnl_strlen(buffer) + 1);
+	while (i < (int)gnl_strlen(buffer))
+	{
+		(*next_line)[i] = buffer[i];
+		i++;
+	}
+	(*next_line)[i] = '\0';
+	return (*next_line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	data[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*next_line;
 	int			i;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	next_line = move_buf_nl(buffer, &next_line);
+	next_line = handle_read(fd, buffer, next_line);
+	if (!next_line)
 	{
 		while (i < BUFFER_SIZE)
-			data[i++] = 0;
+		{
+			buffer[i] = '\0';
+			i++;
+		}
+		buffer[i] = '\0';
 		return (NULL);
 	}
-	return (verif_data(data, fd));
+	remove_begin(buffer);
+	return (next_line);
 }

@@ -5,31 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 06:59:56 by fflamion          #+#    #+#             */
-/*   Updated: 2024/09/07 13:42:31 by fflamion         ###   ########.fr       */
+/*   Created: 2024/09/17 11:14:34 by fflamion          #+#    #+#             */
+/*   Updated: 2024/09/17 11:14:37 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# define OPEN_MAX 8192
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1024
 # endif
 
-char	*get_next_line(int fd);
-char	*verif_data(char data[BUFFER_SIZE], int fd);
-char	*taking_the_buff(int fd, char data[BUFFER_SIZE], char *output);
-int		set_data(char data[BUFFER_SIZE], char *output, int bytes_read);
+# include <stdlib.h>
+# include <unistd.h>
+# include <limits.h>
 
-void	*ftt_calloc(size_t num, size_t size);
-char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(const char *s);
-char	*my_strjoin(char *s1, char *s2);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*get_next_line(int fd);
+
+char	*move_buf_nl(char *buffer, char **next_line);
+
+void	*gnl_calloc(size_t n, size_t size);
+
+size_t	gnl_strlen(char *str);
+
+char	*gnl_strjoin(char *old, char *tmp);
+
+char	*gnl_substr(char *s, unsigned int start, size_t len);
+
+int		get_nl(char *buf);
 
 #endif

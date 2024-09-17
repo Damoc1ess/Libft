@@ -5,111 +5,115 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 14:43:10 by fflamion          #+#    #+#             */
-/*   Updated: 2024/09/07 13:42:31 by fflamion         ###   ########.fr       */
+/*   Created: 2024/09/17 11:14:17 by fflamion          #+#    #+#             */
+/*   Updated: 2024/09/17 11:14:20 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft.h"
 
-void	*ftt_calloc(size_t num, size_t size)
+size_t	gnl_strlen(char *str)
 {
-	void	*output;
-	char	*initializing_chain;
 	size_t	i;
-	size_t	total_size;
 
-	total_size = num * size;
-	output = malloc(total_size);
-	if (!output && total_size == 0)
-		return (NULL);
-	initializing_chain = (char *)output;
 	i = 0;
-	while (i < total_size)
-		initializing_chain[i++] = 0;
-	return (output);
+	while (str && str[i])
+		i++;
+	return (i);
 }
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+int	get_nl(char *buf)
 {
-	char		*d;
-	const char	*s;
+	int	i;
 
-	if (dest == NULL && src == NULL)
-		return (NULL);
-	d = (char *)dest;
-	s = (const char *)src;
-	while (n--)
-		*d++ = *s++;
-	return (dest);
-}
-
-char	*my_strjoin(char *s1, char *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	char	*result;
-
-	len1 = 0;
-	len2 = 0;
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	if (s2 == NULL)
-		return (ft_strdup(s1));
-	while (s1[len1])
-		len1++;
-	while (s2[len2])
-		len2++;
-	result = ftt_calloc(len1 + len2 + 1, sizeof(char));
-	if (result != NULL)
-	{
-		ft_memcpy(result, s1, len1);
-		ft_memcpy(result + len1, s2, len2);
-		result[len1 + len2] = '\0';
-	}
-	return (result);
-}
-
-char	*ft_strchr(const char *str, int c)
-{
-	if (!str)
-		return (NULL);
-	while (*str != '\0')
-	{
-		if (*str == (char)c)
-			return ((char *)str);
-		str++;
-	}
-	if ((char)c == '\0')
-		return ((char *)str);
-	return (NULL);
-}
-
-char	*ft_strdup(const char *s)
-{
-	const char	*temp;
-	char		*dup;
-	size_t		len;
-	size_t		i;
-
-	if (!s)
-		return (NULL);
-	temp = s;
-	len = 0;
 	i = 0;
-	if (s[0] == '\0')
-		return (NULL);
-	while (*temp++)
-		len++;
-	dup = (char *)malloc(len + 1);
-	if (dup == NULL)
-		return (NULL);
-	while (i < len)
+	while (buf[i])
 	{
-		dup[i] = s[i];
+		if (buf[i] == '\n')
+			return (i + 1);
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	return (0);
+}
+
+void	*gnl_calloc(size_t n, size_t size)
+{
+	void			*allocated;
+	size_t			i;
+	unsigned char	*location;
+
+	i = 0;
+	if (n == 0 || size == 0)
+	{
+		allocated = malloc(0);
+		if (!allocated)
+			return (NULL);
+		return (allocated);
+	}
+	else if (n * size < size || n * size < n)
+		return (NULL);
+	allocated = (void *)malloc(n * size);
+	if (!allocated)
+		return (NULL);
+	location = (unsigned char *)allocated;
+	while (i < (n * size))
+	{
+		location[i] = 0;
+		i++;
+	}
+	return (allocated);
+}
+
+char	*gnl_strjoin(char *old, char *tmp)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	new = malloc(sizeof(char) * (gnl_strlen(old) + gnl_strlen(tmp) + 1));
+	if (!new)
+		return (NULL);
+	while (old && old[i])
+	{
+		new[i] = old[i];
+		i++;
+	}
+	while (tmp && tmp[j])
+	{
+		new[i + j] = tmp[j];
+		j++;
+	}
+	new[i + j] = '\0';
+	if (old)
+		free(old);
+	return (new);
+}
+
+char	*gnl_substr(char *s, unsigned int start, size_t len)
+{
+	char	*new_str;
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	if (start >= i)
+		len = 0;
+	else if (start + len >= i)
+		len = i - start;
+	new_str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (len && s[start + i] && i < len)
+	{
+		new_str[i] = s[start + i];
+		i++;
+	}
+	new_str[i] = '\0';
+	if (s)
+		free(s);
+	return (new_str);
 }

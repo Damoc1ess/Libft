@@ -6,11 +6,11 @@
 /*   By: fflamion <fflamion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 18:43:26 by fflamion          #+#    #+#             */
-/*   Updated: 2024/09/08 19:05:43 by fflamion         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:03:03 by fflamion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
 int	ft_putstr_red(const char *str)
 {
